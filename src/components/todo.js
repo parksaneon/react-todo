@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TodoItem = React.memo(function TodoItem({ todo, onToggle }) {
   return (
@@ -21,7 +21,7 @@ const TodoList = React.memo(function TodoList({ todos, onToggle }) {
   );
 });
 
-function Todos({ todos, onCreate, onToggle }) {
+function Todos({ todos, onCreate, onToggle, getTodos }) {
   const [text, setText] = useState("");
   const onChange = (e) => setText(e.target.value);
   const onSubmit = (e) => {
@@ -29,6 +29,11 @@ function Todos({ todos, onCreate, onToggle }) {
     onCreate(text);
     setText("");
   };
+
+  useEffect(() => {
+    getTodos();
+  }, [getTodos]);
+
   return (
     <div>
       <form onSubmit={onSubmit}>
