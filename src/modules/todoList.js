@@ -1,5 +1,6 @@
 import axios from "../../node_modules/axios/index";
 import { call, put, takeEvery } from "redux-saga/effects";
+import { AddTodoApi } from "./api";
 
 const tempItem = {
   id: 1,
@@ -10,12 +11,12 @@ const tempItem = {
 const initialState = [tempItem];
 
 // 초기 상태 정의
-let nextId = 4;
+let nextId = 0;
 
 // Action Type 정의
 const GET_TODO_LIST = "TODO/GET_TODO_LIST";
 const SUCCESS_TODO_LIST = "TODO/SUCCESS_TODO_LIST";
-const CREAT_TODO_LIST = "TODO/CREAT_TODO_LIST";
+const ADD_TODO_LIST = "TODO/ADD_TODO_LIST";
 const TOGGLE_TODO_ITEM = "TODO/TOGGLE_TODO_ITEM";
 const ERROR_TODO_LIST = "TODO/ERROR_TODO_LIST";
 
@@ -30,10 +31,11 @@ export const success = (todos) => ({
 });
 
 export const addTodo = (text) => ({
-  type: CREAT_TODO_LIST,
+  type: ADD_TODO_LIST,
   todo: {
     id: (nextId += 1),
     text,
+    done: false,
   },
 });
 
@@ -57,7 +59,8 @@ const todos = (state = initialState, action) => {
       return state;
     case SUCCESS_TODO_LIST:
       return action.todos;
-    case CREAT_TODO_LIST:
+    case ADD_TODO_LIST:
+      console.log(state, action.todo);
       return state.concat(action.todo);
     case TOGGLE_TODO_ITEM:
       return state.map((todo) =>
@@ -74,9 +77,19 @@ export default todos;
 
 export function* getTodosSaga() {
   try {
-    const todos = yield call(axios.get, "/todos");
-    console.log(success(todos.data));
-    yield put(success(todos.data));
+    const res = yield call(axios.get, "/todos");
+    const todos = res.data;
+    nextId = todos.length;
+    yield put(success(todos));
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export function* addTodosSaga(action) {
+  try {
+    yield call(AddTodoApi, action.todo);
+    nextId = todos.length;
   } catch (error) {
     console.log(error.message);
   }
@@ -85,4 +98,7 @@ export function* getTodosSaga() {
 // 특정 액션 모니터링
 export function* watchGetTodos() {
   yield takeEvery(GET_TODO_LIST, getTodosSaga);
+}
+export function* watchAddTodos() {
+  yield takeEvery(ADD_TODO_LIST, addTodosSaga);
 }

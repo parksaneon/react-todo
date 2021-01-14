@@ -14,6 +14,16 @@
       "id": 3,
       "text": "redux-saga도 사용해봅시다",
       "done": false
+    },
+    {
+      "id": 4,
+      "text": "fff",
+      "done": false
+    },
+    {
+      "id": 5,
+      "text": "ㄷㄹ",
+      "done": false
     }
   ]
 }

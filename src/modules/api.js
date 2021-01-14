@@ -1,16 +1,17 @@
-// import axios from "../../node_modules/axios/index";
+import axios from "../../node_modules/axios/index";
 
 // export const getTodosApi = async () => {
 //   const result = await axios.get("/todos");
 //   return result.data;
 // };
-// export const makeTodoApi = async (newTodo) => {
-//   try {
-//     axios.post(`/posts/`, newTodo);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const AddTodoApi = async (newTodo) => {
+  try {
+    const res = await axios.post("/todos", newTodo);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const deleteTodoApi = async (id) => {
 //   try {
