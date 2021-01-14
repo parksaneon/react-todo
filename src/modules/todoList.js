@@ -89,7 +89,7 @@ export function* getTodosSaga() {
 export function* addTodosSaga(action) {
   try {
     yield call(AddTodoApi, action.todo);
-    nextId = todos.length;
+    nextId += 1;
   } catch (error) {
     console.log(error.message);
   }
