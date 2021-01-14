@@ -14,6 +14,7 @@ const TodoItem = React.memo(function TodoItem({ todo, onToggle }) {
 const TodoList = React.memo(function TodoList({ todos, onToggle }) {
   return (
     <ul>
+      {todos.length === 0 && <p>데이터가 없습니다.</p>}
       {todos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} onToggle={onToggle} />
       ))}
