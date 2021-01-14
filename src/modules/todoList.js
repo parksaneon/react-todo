@@ -1,8 +1,5 @@
-import { useCallback } from "react";
 import axios from "../../node_modules/axios/index";
-import { call, put, takeEvery, delay } from "redux-saga/effects";
-import { getTodosApi, deleteTodoApi, editTodoApi, makeTodoApi } from "./api";
-import { createAction } from "redux-actions";
+import { call, put, takeEvery } from "redux-saga/effects";
 
 const tempItem = {
   id: 1,
@@ -57,9 +54,9 @@ export const toggleTodo = (id) => ({
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case GET_TODO_LIST:
-      return action;
+      return state;
     case SUCCESS_TODO_LIST:
-      return action;
+      return action.todos;
     case CREAT_TODO_LIST:
       return state.concat(action.todo);
     case TOGGLE_TODO_ITEM:

@@ -1,13 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todos from "../components/todo";
-import {
-  addTodo,
-  toggleTodo,
-  TODO_LIST,
-  getTodo,
-  getTodosSaga,
-} from "../modules/todoList";
+import { addTodo, toggleTodo, getTodo } from "../modules/todoList";
 
 function TodosContainer() {
   const [] = useState([]);

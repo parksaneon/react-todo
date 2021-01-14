@@ -1,4 +1,4 @@
-import { delay, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { delay, put, takeEvery } from "redux-saga/effects";
 
 // 초기 상태
 const initialState = {
