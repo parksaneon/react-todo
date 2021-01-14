@@ -1,23 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todos from "../components/todo";
-import {
-  addTodo,
-  toggleTodo,
-  TODO_LIST,
-  getTodosSagaStart,
-  getTodo,
-} from "../modules/todoList";
+import { addTodo, toggleTodo, TODO_LIST, getTodo } from "../modules/todoList";
 
 function TodosContainer() {
   const [] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getTodo();
+    dispatch(getTodo());
   }, []);
 
-  const todos = useSelector((state) => state.todos.todos);
+  const todos = useSelector((state) => state.todos);
   console.log(todos);
   const onCreate = (text) => dispatch(addTodo(text));
   const onToggle = useCallback((id) => dispatch(toggleTodo(id)), [dispatch]);

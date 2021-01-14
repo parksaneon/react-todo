@@ -29,7 +29,6 @@ function Todos({ todos, onCreate, onToggle }) {
     onCreate(text);
     setText("");
   };
-  console.log(todos);
   return (
     <div>
       <form onSubmit={onSubmit}>

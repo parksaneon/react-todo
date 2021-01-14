@@ -12,10 +12,10 @@ import { createAction } from "redux-actions";
 
 // const initialState = [tempItem];
 
-const initialState = [];
+// const initialState = [];
 
 // 초기 상태 정의
-let nextId = initialState.length + 1;
+let nextId = 4;
 
 // Action Type 정의
 const TODO_LIST = "TODO/TODO_LIST";
@@ -50,7 +50,7 @@ export const toggleTodo = (id) => ({
 });
 
 // reducer
-const todos = (state = initialState, action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
     case GET_TODO_LIST:
       return action.todos;
@@ -82,13 +82,7 @@ export function* getTodosSaga() {
   }
 }
 
-export const getTodosSagaStart = createAction(GET_TODO_LIST);
-
-export function* booksSaga() {
-  yield takeEvery(GET_TODO_LIST, getTodosSagaStart);
-}
-
 // 특정 액션 모니터링
-export function* todosaga() {
+export function* watchGetTodos() {
   yield takeEvery(GET_TODO_LIST, getTodosSaga);
 }
