@@ -12,7 +12,7 @@ import { createAction } from "redux-actions";
 
 // const initialState = [tempItem];
 
-const initialState = {};
+const initialState = [];
 
 // 초기 상태 정의
 let nextId = initialState.length + 1;
@@ -53,11 +53,7 @@ export const toggleTodo = (id) => ({
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case GET_TODO_LIST:
-      return {
-        todos: [action.payload],
-        loading: false,
-        error: null,
-      };
+      return action.todos;
     case TODO_LIST:
       return state.concat(action.todo);
     case TOGGLE_TODO_ITEM:
@@ -75,20 +71,14 @@ export default todos;
 
 export function* getTodosSaga() {
   try {
-    yield delay(2000);
-
-    const todos = yield call(getTodosApi);
+    const todos = yield call(axios.get, "/todos");
     console.log(todos);
     yield put({
       type: GET_TODO_LIST,
-      payload: todos,
+      todos,
     });
   } catch (error) {
-    yield put({
-      type: GET_TODO_ERROR,
-      error: true,
-      payload: error,
-    });
+    console.log(error.message);
   }
 }
 

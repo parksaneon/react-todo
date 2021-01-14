@@ -12,12 +12,11 @@ const TodoItem = React.memo(function TodoItem({ todo, onToggle }) {
 });
 
 const TodoList = React.memo(function TodoList({ todos, onToggle }) {
-  console.log(todos);
   return (
     <ul>
-      {/* {todos.map((todo) => (
+      {todos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} onToggle={onToggle} />
-      ))} */}
+      ))}
     </ul>
   );
 });
@@ -30,7 +29,7 @@ function Todos({ todos, onCreate, onToggle }) {
     onCreate(text);
     setText("");
   };
-
+  console.log(todos);
   return (
     <div>
       <form onSubmit={onSubmit}>

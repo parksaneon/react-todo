@@ -6,6 +6,7 @@ import {
   toggleTodo,
   TODO_LIST,
   getTodosSagaStart,
+  getTodo,
 } from "../modules/todoList";
 
 function TodosContainer() {
@@ -13,10 +14,11 @@ function TodosContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTodosSagaStart());
+    getTodo();
   }, []);
 
   const todos = useSelector((state) => state.todos.todos);
+  console.log(todos);
   const onCreate = (text) => dispatch(addTodo(text));
   const onToggle = useCallback((id) => dispatch(toggleTodo(id)), [dispatch]);
 
