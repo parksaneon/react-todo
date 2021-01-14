@@ -4,15 +4,13 @@ import { call, put, takeEvery, delay } from "redux-saga/effects";
 import { getTodosApi, deleteTodoApi, editTodoApi, makeTodoApi } from "./api";
 import { createAction } from "redux-actions";
 
-// const tempItem = {
-//   id: 1,
-//   text: "예시",
-//   done: false,
-// };
+const tempItem = {
+  id: 1,
+  text: "예시",
+  done: false,
+};
 
-// const initialState = [tempItem];
-
-// const initialState = [];
+const initialState = [tempItem];
 
 // 초기 상태 정의
 let nextId = 4;
@@ -50,7 +48,7 @@ export const toggleTodo = (id) => ({
 });
 
 // reducer
-const todos = (state = [], action) => {
+const todos = (state = initialState, action) => {
   switch (action.type) {
     case GET_TODO_LIST:
       return action.todos;
@@ -70,9 +68,9 @@ export default todos;
 // ---------------------------------------------------------- saga
 
 export function* getTodosSaga() {
+  console.log("saga start");
   try {
     const todos = yield call(axios.get, "/todos");
-    console.log(todos);
     yield put({
       type: GET_TODO_LIST,
       todos,

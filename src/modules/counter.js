@@ -62,6 +62,8 @@ const counter = (state = initialState, action) => {
 // 리듀서 함수 export
 export default counter;
 
+// redux 비동기 -----------------------------------------------------------------------
+
 // redux-thunk
 export const decreaseCountAsyncThunk = () => (dispatch, getState) => {
   setTimeout(() => {
