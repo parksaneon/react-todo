@@ -17,12 +17,27 @@
     },
     {
       "id": 4,
-      "text": "fff",
+      "text": "ㄹㄹ",
       "done": false
     },
     {
       "id": 5,
-      "text": "ㄷㄹ",
+      "text": "ㄹㄹ",
+      "done": false
+    },
+    {
+      "id": 6,
+      "text": "ㅁㄹㄷㅁㅈㄷ",
+      "done": false
+    },
+    {
+      "id": 7,
+      "text": "ㅎㅁㅇㄹㅇㅎ",
+      "done": false
+    },
+    {
+      "id": 8,
+      "text": "ㄹㅇㅎㅊ",
       "done": false
     }
   ]
