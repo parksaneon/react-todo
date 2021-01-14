@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "text": "리덕스 미들웨어를 배워봅시다",
+      "done": false
+    },
+    {
+      "id": 2,
+      "text": "redux-thunk를 사용해봅시다",
+      "done": false
+    },
+    {
+      "id": 3,
+      "text": "redux-saga도 사용해봅시다",
+      "done": false
+    }
+  ]
+}
