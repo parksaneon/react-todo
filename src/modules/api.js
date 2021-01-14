@@ -1,13 +1,13 @@
 import axios from "../../node_modules/axios/index";
 
-// export const getTodosApi = async () => {
-//   const result = await axios.get("/todos");
-//   return result.data;
-// };
-export const AddTodoApi = async (newTodo) => {
+export const getTodosApi = async () => {
+  const result = await axios.get("/todos");
+  return result.data;
+};
+
+export const addTodoApi = async (newTodo) => {
   try {
-    const res = await axios.post("/todos", newTodo);
-    return res.data;
+    await axios.post("/todos", newTodo);
   } catch (error) {
     console.log(error);
   }

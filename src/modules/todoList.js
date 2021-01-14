@@ -1,6 +1,6 @@
 import axios from "../../node_modules/axios/index";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { AddTodoApi } from "./api";
+import { getTodosApi, addTodoApi } from "./api";
 
 const tempItem = {
   id: 1,
@@ -60,7 +60,6 @@ const todos = (state = initialState, action) => {
     case SUCCESS_TODO_LIST:
       return action.todos;
     case ADD_TODO_LIST:
-      console.log(state, action.todo);
       return state.concat(action.todo);
     case TOGGLE_TODO_ITEM:
       return state.map((todo) =>
@@ -77,8 +76,8 @@ export default todos;
 
 export function* getTodosSaga() {
   try {
-    const res = yield call(axios.get, "/todos");
-    const todos = res.data;
+    // const res = yield call(axios.get, "/todos");
+    const todos = yield call(getTodosApi);
     nextId = todos.length;
     yield put(success(todos));
   } catch (error) {
@@ -88,7 +87,7 @@ export function* getTodosSaga() {
 
 export function* addTodosSaga(action) {
   try {
-    yield call(AddTodoApi, action.todo);
+    yield call(addTodoApi, action.todo);
   } catch (error) {
     console.log(error.message);
   }
