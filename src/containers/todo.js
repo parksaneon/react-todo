@@ -18,7 +18,6 @@ function TodosContainer() {
   }, [dispatch]);
 
   const todos = useSelector((state) => state.todos);
-  console.log(todos);
   const onCreate = (text) => dispatch(addTodo(text));
   const onToggle = useCallback((id) => dispatch(toggleTodo(id)), [dispatch]);
 

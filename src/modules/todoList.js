@@ -16,31 +16,37 @@ const initialState = [tempItem];
 let nextId = 4;
 
 // Action Type 정의
-const TODO_LIST = "TODO/TODO_LIST";
 const GET_TODO_LIST = "TODO/GET_TODO_LIST";
+const SUCCESS_TODO_LIST = "TODO/SUCCESS_TODO_LIST";
+const CREAT_TODO_LIST = "TODO/CREAT_TODO_LIST";
 const TOGGLE_TODO_ITEM = "TODO/TOGGLE_TODO_ITEM";
-const GET_TODO_ERROR = "TODO/GET_TODO_ERROR";
+const ERROR_TODO_LIST = "TODO/ERROR_TODO_LIST";
 
 // Action Creator Function
 export const getTodo = () => ({
   type: GET_TODO_LIST,
 });
 
+export const success = (todos) => ({
+  type: SUCCESS_TODO_LIST,
+  todos,
+});
+
 export const addTodo = (text) => ({
-  type: TODO_LIST,
+  type: CREAT_TODO_LIST,
   todo: {
     id: (nextId += 1),
     text,
   },
 });
 
-export const deleteTodo = (text) => ({
-  type: TODO_LIST,
-  todo: {
-    id: (nextId += 1),
-    text,
-  },
-});
+// export const deleteTodo = (text) => ({
+//   type: TODO_LIST,
+//   todo: {
+//     id: (nextId += 1),
+//     text,
+//   },
+// });
 
 export const toggleTodo = (id) => ({
   type: TOGGLE_TODO_ITEM,
@@ -51,8 +57,10 @@ export const toggleTodo = (id) => ({
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case GET_TODO_LIST:
-      return action.todos;
-    case TODO_LIST:
+      return action;
+    case SUCCESS_TODO_LIST:
+      return action;
+    case CREAT_TODO_LIST:
       return state.concat(action.todo);
     case TOGGLE_TODO_ITEM:
       return state.map((todo) =>
@@ -68,13 +76,10 @@ export default todos;
 // ---------------------------------------------------------- saga
 
 export function* getTodosSaga() {
-  console.log("saga start");
   try {
     const todos = yield call(axios.get, "/todos");
-    yield put({
-      type: GET_TODO_LIST,
-      todos,
-    });
+    console.log(success(todos.data));
+    yield put(success(todos.data));
   } catch (error) {
     console.log(error.message);
   }
