@@ -13,18 +13,18 @@ export const addTodoApi = async (newTodo) => {
   }
 };
 
-// export const deleteTodoApi = async (id) => {
-//   try {
-//     axios.delete(`/posts/${id}`);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const deleteTodoApi = async (id) => {
+  try {
+    await axios.delete(`/todos/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// export const editTodoApi = async (editTodo) => {
-//   try {
-//     axios.patch(`/posts/${editTodo.id}`, editTodo);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const toggleTodoApi = async (id, done) => {
+  try {
+    axios.patch(`/todos/${id}`, { done });
+  } catch (error) {
+    console.log(error);
+  }
+};

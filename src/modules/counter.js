@@ -37,13 +37,11 @@ const counter = (state = initialState, action) => {
         ...state,
         diff: action.diff,
       };
-
     case INCREASE:
       return {
         ...state,
         number: state.number + state.diff,
       };
-
     case DECREASE:
       return {
         ...state,

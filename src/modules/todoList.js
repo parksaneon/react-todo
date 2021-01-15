@@ -1,6 +1,6 @@
 import axios from "../../node_modules/axios/index";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { getTodosApi, addTodoApi } from "./api";
+import { getTodosApi, addTodoApi, deleteTodoApi, toggleTodoApi } from "./api";
 
 const tempItem = {
   id: 1,
@@ -17,6 +17,7 @@ let nextId = 0;
 const GET_TODO_LIST = "TODO/GET_TODO_LIST";
 const SUCCESS_TODO_LIST = "TODO/SUCCESS_TODO_LIST";
 const ADD_TODO_LIST = "TODO/ADD_TODO_LIST";
+const DEL_TODO_LIST = "TODO/DEL_TODO_LIST";
 const TOGGLE_TODO_ITEM = "TODO/TOGGLE_TODO_ITEM";
 const ERROR_TODO_LIST = "TODO/ERROR_TODO_LIST";
 
@@ -39,17 +40,15 @@ export const addTodo = (text) => ({
   },
 });
 
-// export const deleteTodo = (text) => ({
-//   type: TODO_LIST,
-//   todo: {
-//     id: (nextId += 1),
-//     text,
-//   },
-// });
+export const deleteTodo = (id) => ({
+  type: DEL_TODO_LIST,
+  id,
+});
 
-export const toggleTodo = (id) => ({
+export const toggleTodo = (id, done) => ({
   type: TOGGLE_TODO_ITEM,
   id,
+  done: !done,
 });
 
 // reducer
@@ -61,6 +60,8 @@ const todos = (state = initialState, action) => {
       return action.todos;
     case ADD_TODO_LIST:
       return state.concat(action.todo);
+    case DEL_TODO_LIST:
+      return state.filter((todo) => todo.id !== action.id);
     case TOGGLE_TODO_ITEM:
       return state.map((todo) =>
         todo.id === action.id ? { ...todo, done: !todo.done } : todo
@@ -76,7 +77,6 @@ export default todos;
 
 export function* getTodosSaga() {
   try {
-    // const res = yield call(axios.get, "/todos");
     const todos = yield call(getTodosApi);
     nextId = todos.length;
     yield put(success(todos));
@@ -85,9 +85,25 @@ export function* getTodosSaga() {
   }
 }
 
-export function* addTodosSaga(action) {
+export function* addTodosSaga({ todo }) {
   try {
-    yield call(addTodoApi, action.todo);
+    yield call(addTodoApi, todo);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export function* delTodosSaga({ id }) {
+  try {
+    yield call(deleteTodoApi, id);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export function* toggleTodosSaga({ id, done }) {
+  try {
+    yield call(toggleTodoApi, id, done);
   } catch (error) {
     console.log(error.message);
   }
@@ -99,4 +115,10 @@ export function* watchGetTodos() {
 }
 export function* watchAddTodos() {
   yield takeEvery(ADD_TODO_LIST, addTodosSaga);
+}
+export function* watchDelTodos() {
+  yield takeEvery(DEL_TODO_LIST, delTodosSaga);
+}
+export function* watchToggleTodos() {
+  yield takeEvery(TOGGLE_TODO_ITEM, toggleTodosSaga);
 }
