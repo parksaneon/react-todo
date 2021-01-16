@@ -14,6 +14,7 @@ export const addTodoApi = async (newTodo) => {
 };
 
 export const deleteTodoApi = async (id) => {
+  console.log("del");
   try {
     await axios.delete(`/todos/${id}`);
   } catch (error) {

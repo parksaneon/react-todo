@@ -1,6 +1,11 @@
 import axios from "../../node_modules/axios/index";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { getTodosApi, addTodoApi, deleteTodoApi, toggleTodoApi } from "./api";
+import {
+  getTodosApi,
+  addTodoApi,
+  deleteTodoApi,
+  toggleTodoApi,
+} from "./services/todoService";
 
 const tempItem = {
   id: 1,
