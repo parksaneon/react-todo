@@ -8,13 +8,13 @@ const SUCCESS_LOGIN = "LOGIM/SUCCESS_LOGIN";
 const FAIL_LOGIN = "LOGIM/FAIL_LOGIN";
 
 // Action Creator
-const reqLogin = (id, pass) => ({
+export const reqLogin = (id, pass) => ({
   type: REQUEST_LOGIN,
   id,
   pass,
 });
 
-const reqLoOut = () => ({
+export const reqLoOut = () => ({
   type: REQUEST_LOGOUT,
 });
 
@@ -42,13 +42,12 @@ export default login;
 // redux-saga
 export function* requestLoginSaga(action) {
   try {
-    yield call(requestLogin, action.id);
-    yield put(reqLogin(action))
+    yield call(requestLogin, action);
+    yield put(reqLogin(action));
   } catch (error) {
-    yield put(reqLoOut())
+    console.log(error);
+    yield put(reqLoOut());
   }
-  
-  
 }
 export function* requestLogOutSaga(params) {
   
@@ -56,9 +55,9 @@ export function* requestLogOutSaga(params) {
 
 
 // 특정 액션 모니터링";
-export function watchRequestLogin(params) {
+export function watchRequestLogin() {
   yield takeEvery(REQUEST_LOGIN, requestLoginSaga)
 }
-export function watchRequestLogout(params) {
+export function watchRequestLogout() {
   yield takeEvery(REQUEST_LOGOUT, requestLogOutSaga)
 }

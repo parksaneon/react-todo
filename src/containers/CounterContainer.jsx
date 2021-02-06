@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import Counter from "../components/counter";
+import Counter from "../components/Counter";
 import {
   increase,
   decrease,

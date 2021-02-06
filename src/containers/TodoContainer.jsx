@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Todos from "../components/todo";
+import Todos from "../components/Todo";
 import { addTodo, toggleTodo, getTodo, deleteTodo } from "../modules/todoList";
 
 function TodosContainer() {

@@ -10,7 +10,7 @@ import rootReducer, { rootSaga } from "./modules/rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ReduxThunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Home from "pages/Home";
 import Login from "pages/Login";
 
@@ -29,8 +29,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={Login} />
+        <App />
       </BrowserRouter>
       <App />
     </Provider>

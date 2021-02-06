@@ -1,6 +1,6 @@
 import { Redirect } from "react-router-dom";
-import TodosContainer from "../containers/counter";
-import CounterContainer from "../containers/todo";
+import TodosContainer from "../containers/CounterContainer";
+import CounterContainer from "../containers/TodoContainer";
 
 function Home() {
   const auth = useSelector((state) => state.auth);
